@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>중계소 웹툰</title><meta name="description" content="이름 없는 중계소 — 시즌 1 완결 웹툰"><meta property="og:title" content="이름 없는 중계소"><meta property="og:description" content="전역 30일을 앞둔 병장이 산꼭대기 중계소에 혼자 남겨졌다."><meta property="og:image" content="https://thebox-234.github.io/webtoon/thumb/poster.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Myeongjo:wght@700;800&family=Nanum+Pen+Script&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4f6;--card:#fff;--ink:#16171b;--sub:#7b7f8c;--line:#e6e7eb;--pt:#00b860}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);font-family:'Noto Sans KR','Noto Sans CJK KR',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:720px;margin:0 auto}
+/* 상단 바 */
+#bar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+#bar .wrap{display:flex;align-items:center;gap:12px;height:54px;padding:0 16px}
+#logo{font-family:'Black Han Sans',sans-serif;font-size:22px;letter-spacing:.5px;color:var(--pt)}
+#bar .ttl{flex:1;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bar .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:18px;border:0;background:transparent}
+/* 작품 홈 */
+.hero{position:relative;background:#0b0d13;color:#fff;overflow:hidden}
+.hero img{display:block;width:100%;height:auto;opacity:.9}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,19,0) 35%,rgba(11,13,19,.92) 88%)}
+.hero .info{position:absolute;left:0;right:0;bottom:0;padding:22px 20px 24px}
+.hero h1{font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:34px;margin:0 0 6px;letter-spacing:1px}
+.hero .au{font-size:14px;color:#c9ccd6}
+.tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.tags span{font-size:12px;padding:4px 10px;border-radius:12px;background:rgba(255,255,255,.14);color:#e9ebf2}
+.box{background:var(--card);padding:18px 20px;border-bottom:1px solid var(--line)}
+.logline{font-size:14.5px;line-height:1.75;color:#3a3d47;margin:0}
+.acts{display:flex;gap:8px;margin-top:16px}
+.btn{flex:1;height:46px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn.main{background:var(--pt);border-color:var(--pt);color:#fff}
+.btn .heart{color:#ff4d6d}
+.lhead{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--card);border-bottom:1px solid var(--line)}
+.lhead b{font-size:15px}
+.lhead button{border:0;background:none;color:var(--sub);font-size:13px}
+.lhead button.on{color:var(--ink);font-weight:700}
+.ep{display:flex;gap:14px;align-items:center;padding:12px 20px;background:var(--card);border-bottom:1px solid var(--line)}
+.ep img{width:96px;height:96px;border-radius:8px;object-fit:cover;flex:none;background:#ddd}
+.ep .t{font-size:15px;font-weight:700;margin-bottom:6px}
+.ep .m{font-size:12.5px;color:var(--sub);display:flex;gap:10px;align-items:center}
+.ep .m .lk{color:#ff4d6d}
+.ep.seen .t{color:#9a9daa}
+.badge{font-size:10.5px;font-weight:700;color:#fff;background:var(--pt);border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:2px}
+.foot{padding:28px 20px 60px;text-align:center;color:var(--sub);font-size:12px}
+/* 뷰어 */
+#strip{max-width:720px;margin:0 auto;background:#fff}
+.panel{position:relative;line-height:0}.panel img{width:100%;height:auto;display:block}
+.panel svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.block svg{display:block;width:100%;height:auto}
+.after{max-width:720px;margin:0 auto;background:var(--card)}
+.likebar{display:flex;flex-direction:column;align-items:center;padding:30px 20px 22px;border-bottom:1px solid var(--line)}
+.likebtn{width:76px;height:76px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:30px;color:#c3c6cf;transition:transform .12s}
+.likebtn.on{color:#ff4d6d;border-color:#ffd0d8;background:#fff5f7}
+.likebtn:active{transform:scale(.92)}
+.likecnt{margin-top:8px;font-size:14px;font-weight:700}
+.likehint{margin-top:4px;font-size:12px;color:var(--sub)}
+.epnav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.epnav a{height:44px;border-radius:10px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.epnav a.off{visibility:hidden}
+.epnav a.mid{background:#f7f7f9}
+.nextcard{display:flex;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.nextcard img{width:72px;height:72px;border-radius:8px;object-fit:cover}
+.nextcard .s{font-size:12px;color:var(--pt);font-weight:700}
+.nextcard .t{font-size:15px;font-weight:700;margin-top:3px}
+.cmt{padding:18px 20px 40px}
+.cmt h3{font-size:15px;margin:0 0 12px}
+.cmt h3 span{color:var(--pt)}
+.cform{display:flex;gap:8px;margin-bottom:14px}
+.cform textarea{flex:1;min-height:46px;max-height:140px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit;font-size:14px}
+.cform button{width:70px;border:0;border-radius:10px;background:var(--ink);color:#fff;font-weight:700}
+.cform button:disabled{opacity:.4}
+.citem{padding:12px 0;border-top:1px solid var(--line)}
+.citem .who{font-size:13px;font-weight:700}
+.citem .when{font-size:11.5px;color:var(--sub);margin-left:6px;font-weight:400}
+.citem .txt{font-size:14px;line-height:1.6;margin-top:5px;white-space:pre-wrap;word-break:break-word}
+.citem .del{border:0;background:none;color:var(--sub);font-size:12px;float:right}
+.cnote{font-size:13px;color:var(--sub);padding:14px;background:#f7f7f9;border-radius:10px;line-height:1.6}
+.libhead{padding:22px 20px 8px;background:var(--card)}.libhead h2{margin:0;font-size:22px}.libhead p{margin:4px 0 0;color:var(--sub);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:16px 20px 24px;background:var(--card)}
+.card{display:block}.cv{position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:#e9eaee}
+.cv img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}.card:hover .cv img{transform:scale(1.04)}
+.done{position:absolute;left:8px;top:8px;background:#16171b;color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:5px}
+.ct{font-weight:700;font-size:15px;margin-top:8px}.ca{font-size:12.5px;color:var(--sub);margin-top:2px}.cg{font-size:12px;color:var(--pt);margin-top:4px}
+.cr{font-size:11.5px;color:var(--sub);margin-top:4px}
+.soon .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#9a9daa;font-size:14px;line-height:1.6}.soon .ct{color:#9a9daa}
+.toTop{position:fixed;right:16px;bottom:18px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(22,23,27,.75);color:#fff;font-size:18px;display:none;z-index:15}
+</style></head><body>
+<div id="bar"><div class="wrap"><a id="logo" href="#">중계소 웹툰</a><div class="ttl" id="barTitle"></div><button class="ic" id="barList" aria-label="목록" title="회차 목록">☰</button></div></div>
+<main id="app"></main>
+<button class="toTop" id="toTop" aria-label="맨 위로">↑</button>
+<script>
+(function(){
+const W=1000, ink='#17181d';
+const FS="'Noto Sans KR','Noto Sans CJK KR',sans-serif";
+const FM="'Nanum Myeongjo','Noto Serif CJK KR',serif";
+const FX="'Black Han Sans','Noto Sans CJK KR',sans-serif";
+const FP="'Nanum Pen Script','Nanum Myeongjo',cursive";
+const f1=n=>Math.round(n*10)/10;
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+/* ---------- 글자 ---------- */
+function tw(l,fs){let n=0;for(const ch of l){n+=/[ㄱ-힝]/.test(ch)?1:(ch===' '?0.33:(ch==='…'?0.9:0.6))}return n*fs}
+function txt(x,y,lines,o={}){
+  const fs=o.fs||24, lh=o.lh||fs*1.4, f=o.f||FS, fill=o.fill||ink, w=o.w||700, a=o.a||'middle';
+  const y0=y-(lines.length-1)*lh/2;
+  return lines.map((l,i)=>`<text x="${x}" y="${f1(y0+i*lh)}" font-family="${f}" font-size="${fs}" font-weight="${w}" fill="${fill}" text-anchor="${a}" dominant-baseline="central"${o.ls?` letter-spacing="${o.ls}"`:''}${o.op?` opacity="${o.op}"`:''}>${l}</text>`).join('');
+}
+function bubble(x,y,lines,o={}){
+  const fs=o.fs||24, lh=fs*1.42, type=o.type||'normal';
+  const w=Math.max(...lines.map(l=>tw(l,fs)))+(o.padx||58), h=lines.length*lh+(o.pady||30);
+  const tail=o.tail; let s='';
+  if(type==='normal'){
+    if(tail){const [tx,ty]=tail,a=Math.atan2(ty-y,tx-x),px=-Math.sin(a),py=Math.cos(a);
+      s+=`<polygon points="${f1(x+px*15)},${f1(y+py*15)} ${f1(x-px*15)},${f1(y-py*15)} ${tx},${ty}" fill="#fff" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`;}
+    s+=`<rect x="${f1(x-w/2)}" y="${f1(y-h/2)}" width="${f1(w)}" height="${f1(h)}" rx="${f1(Math.min(h/2,46))}" fill="#fff" stroke="${ink}" stroke-width="3"/>`;
+    if(tail){const [tx,ty]=tail,a=Math.atan2(ty-y,tx-x),px=-Math.sin(a),py=Math.cos(a),mx=x+(tx-x)*.8,my=y+(ty-y)*.8;
+      s+=`<polygon points="${f1(x+px*11)},${f1(y+py*11)} ${f1(x-px*11)},${f1(y-py*11)} ${f1(mx)},${f1(my)}" fill="#fff"/>`;}
+  } else if(type==='thought'){
+    if(tail){const [tx,ty]=tail;for(let i=1;i<=3;i++){const k=.62+i*.11,r=10-i*2.4;s+=`<circle cx="${f1(x+(tx-x)*k)}" cy="${f1(y+(ty-y)*k)}" r="${f1(r)}" fill="#fff" stroke="${ink}" stroke-width="2.5"/>`}}
+    s+=`<rect x="${f1(x-w/2)}" y="${f1(y-h/2)}" width="${f1(w)}" height="${f1(h)}" rx="${f1(h/2)}" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>`;
+    s+=`<rect x="${f1(x-w/2)}" y="${f1(y-h/2)}" width="${f1(w)}" height="${f1(h)}" rx="${f1(h/2)}" fill="none" stroke="${ink}" stroke-width="1" opacity=".25"/>`;
+  } else if(type==='radio'||type==='shout'){
+    const n=type==='radio'?46:30, k=type==='radio'?1.07:1.2, rx=w/2+(type==='shout'?26:12), ry=h/2+(type==='shout'?22:10);
+    let pts=[]; const r=rng(Math.round(x+y));
+    for(let i=0;i<n;i++){const a=i/n*Math.PI*2, rr=(i%2?1:k)+(type==='radio'?(r()-.5)*.04:(r()-.5)*.08); pts.push(`${f1(x+Math.cos(a)*rx*rr)},${f1(y+Math.sin(a)*ry*rr)}`)}
+    if(tail){const [tx,ty]=tail; const a=Math.atan2(ty-y,tx-x); const sx=x+Math.cos(a)*rx*.95, sy=y+Math.sin(a)*ry*.95;
+      if(type==='radio'){const px=-Math.sin(a)*14,py=Math.cos(a)*14; s+=`<polyline points="${f1(sx)},${f1(sy)} ${f1(sx+(tx-sx)*.35+px)},${f1(sy+(ty-sy)*.35+py)} ${f1(sx+(tx-sx)*.6-px)},${f1(sy+(ty-sy)*.6-py)} ${tx},${ty}" fill="none" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`;}
+      else {const px=-Math.sin(a),py=Math.cos(a); s+=`<polygon points="${f1(x+px*20)},${f1(y+py*20)} ${f1(x-px*20)},${f1(y-py*20)} ${tx},${ty}" fill="#fff" stroke="${ink}" stroke-width="3.5" stroke-linejoin="round"/>`;}
+    }
+    s+=`<polygon points="${pts.join(' ')}" fill="${type==='radio'?'#eef1ee':'#fff'}" stroke="${ink}" stroke-width="${type==='radio'?2.5:3.5}" stroke-linejoin="round"/>`;
+    if(type==='shout'&&tail){const [tx,ty]=tail,a=Math.atan2(ty-y,tx-x),px=-Math.sin(a),py=Math.cos(a),mx=x+(tx-x)*.72,my=y+(ty-y)*.72;
+      s+=`<polygon points="${f1(x+px*15)},${f1(y+py*15)} ${f1(x-px*15)},${f1(y-py*15)} ${f1(mx)},${f1(my)}" fill="#fff"/>`;}
+  }
+  s+=txt(x,y,lines,{fs,lh,w:type==='radio'?500:(type==='shout'?900:700),fill:type==='radio'?'#3a3d3a':ink,ls:type==='radio'?1:0});
+  return s;
+}
+function cap(x,y,lines,o={}){
+  const fs=o.fs||22, lh=fs*1.55, dark=o.dark;
+  const w=Math.max(...lines.map(l=>tw(l,fs)))+50, h=lines.length*lh+26;
+  return `<rect x="${f1(x-w/2)}" y="${f1(y-h/2)}" width="${f1(w)}" height="${f1(h)}" fill="${dark?'#08090d':'#fffdf6'}" stroke="${dark?'#cfc8b6':ink}" stroke-width="2"/>`+
+    txt(x,y,lines,{fs,lh,f:FM,fill:dark?'#efe9da':ink,w:700});
+}
+function sfx(x,y,t,o={}){
+  const fs=o.fs||60;
+  return `<text x="${x}" y="${y}" font-family="${FX}" font-size="${fs}" fill="${o.fill||ink}" stroke="${o.stroke||'#fff'}" stroke-width="${o.sw||8}" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" dominant-baseline="central" transform="rotate(${o.r||0} ${x} ${y})" letter-spacing="${o.ls||0}" opacity="${o.op||1}">${t}</text>`;
+}
+
+
+const DATA=[{"n": 1, "title": "무전이 끊긴 밤", "items": [{"card": ["전역 D-30"], "style": "dark", "h": 520}, {"img": "e01_p01", "h": 750, "ov": [{"k": "sfx", "x": 160, "y": 110, "t": "사각", "fs": 70, "r": -8}, {"k": "say", "x": 300, "y": -110, "t": ["서른 개쯤이야."], "tail": null, "ty": "thought", "fs": 34}]}, {"img": "e01_p02", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -200, "t": ["해발 1,200m.", "강원도 어딘가, 지도에는 번호로만 적힌 산."], "dark": null}]}, {"img": "e01_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["근무자는 세 명."], "dark": null}, {"k": "name", "x": 270, "y": -45, "t": "박정우 중사"}, {"k": "name", "x": 500, "y": -45, "t": "김민재 일병"}, {"k": "name", "x": 730, "y": -45, "t": "한도윤 병장"}]}, {"gap": 40, "to": null}, {"img": "e01_p04", "h": 750, "ov": [{"k": "say", "x": 790, "y": 110, "t": ["내일 눈 온단다.", "오늘 보급 받아 와야 돼."], "tail": [470, 200], "ty": "normal", "fs": 34}]}, {"img": "e01_p05", "h": 750, "ov": [{"k": "say", "x": 810, "y": 130, "t": ["넵!"], "tail": [620, 250], "ty": "shout", "fs": 56}, {"k": "sfx", "x": 190, "y": 110, "t": "벌떡", "fs": 64, "r": -8}]}, {"img": "e01_p06", "h": 750, "ov": [{"k": "say", "x": 400, "y": 90, "t": ["병장님,", "뭐 사다 드릴까요?"], "tail": [640, 230], "ty": "normal", "fs": 34}]}, {"img": "e01_p07", "h": 750, "ov": [{"k": "say", "x": 230, "y": 140, "t": ["PX 들르면", "핫팩이나 한 박스."], "tail": [400, 300], "ty": "normal", "fs": 34}]}, {"img": "e01_p08", "h": 750, "ov": [{"k": "say", "x": 230, "y": 100, "t": ["전역하시는 분이", "아직도 추위를 타십니까?"], "tail": [340, 220], "ty": "normal", "fs": 34}, {"k": "say", "x": 780, "y": -100, "t": ["전역하는 사람이", "제일 추위 타."], "tail": [1030, -30], "ty": "normal", "fs": 34}]}, {"img": "e01_p09", "h": 750, "ov": [{"k": "say", "x": 250, "y": 85, "t": ["다녀오겠습니다!"], "tail": [290, 195], "ty": "normal", "fs": 34}]}, {"img": "e01_p10", "h": 1769, "ov": [{"k": "sfx", "x": 640, "y": 600, "t": "부르릉…", "fs": 72, "r": -8}, {"k": "sfx", "x": 330, "y": 1100, "t": "부르르…", "fs": 50, "r": -8}, {"k": "sfx", "x": 200, "y": 1550, "t": "르…", "fs": 34, "r": -8}]}, {"img": "e01_p11", "h": 750, "ov": [{"k": "cap", "x": 320, "y": 80, "t": ["이상하게도,", "그 소리가 오래 기억에 남았다."], "dark": null}]}, {"gap": 160, "to": null}, {"img": "e01_p12", "h": 750, "ov": [{"k": "cap", "x": 330, "y": 60, "t": ["오후 여섯 시. 정기 교신 시간."], "dark": null}, {"k": "say", "x": 580, "y": 180, "t": ["여기는 중계소,", "감도 확인 바람."], "tail": [470, 340], "ty": "normal", "fs": 34}]}, {"img": "e01_p13", "h": 750, "ov": [{"k": "say", "x": 640, "y": 375, "t": ["치직……"], "tail": null, "ty": "radio", "fs": 48}]}, {"img": "e01_p14", "h": 750, "ov": [{"k": "note", "x": 360, "y": 220, "t": ["18:00 교신 불량."], "fs": 40}, {"k": "cap", "x": 560, "y": -70, "t": ["산꼭대기라 가끔 있는 일이었다."], "dark": null}]}, {"card": ["일곱 시. 여덟 시. 아홉 시."], "style": "paper", "h": 380}, {"img": "e01_p15", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["트럭은 돌아오지 않았다."], "dark": null}]}, {"img": "e01_p16", "h": 750, "ov": [{"k": "say", "x": 790, "y": 110, "t": ["눈 때문에 아래서", "자고 오나 보다."], "tail": [610, 260], "ty": "thought", "fs": 34}]}, {"img": "e01_p17", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -150, "t": ["박 중사는 그런 일이 있으면", "반드시 무전부터 하는 사람이었다."], "dark": null}, {"k": "cap", "x": 500, "y": -55, "t": ["2년 가까이, 한 번도 어긴 적이 없었다."], "dark": null}]}, {"gap": 300, "to": "night"}, {"card": ["밤 열한 시 사십 분."], "style": "dark", "h": 420}, {"img": "e01_p18", "h": 750, "ov": [{"k": "sfx", "x": 780, "y": 200, "t": "휘이잉", "fs": 72, "r": -8}, {"k": "cap", "x": 640, "y": -70, "t": ["눈은 예보보다 일찍 오고 있었다."], "dark": null}]}, {"gap": 60, "to": null}, {"img": "e01_p19", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 110, "t": ["근무 때마다", "그 불빛을 세는 버릇이 있었다."], "dark": null}, {"k": "cap", "x": 500, "y": -180, "t": ["30일 뒤엔 자신도", "저 불빛 중 하나가 될 것이었다."], "dark": null}]}, {"gap": 60, "to": null}, {"card": ["그런데 오늘은 불빛이 이상했다."], "style": "dark", "h": 420}, {"img": "e01_p20", "h": 750, "ov": [{"k": "sfx", "x": 280, "y": 170, "t": "탁", "fs": 54, "r": -8}, {"k": "sfx", "x": 380, "y": 250, "t": "탁", "fs": 46, "r": -8}, {"k": "sfx", "x": 470, "y": 320, "t": "탁", "fs": 40, "r": -8}, {"k": "cap", "x": 500, "y": -60, "t": ["국도의 가로등이 끝에서부터 하나씩 꺼지고 있었다."], "dark": null}]}, {"card": ["누군가 스위치를 차례로 내리는 것처럼.", "천천히, 조용히."], "style": "dark", "h": 420}, {"img": "e01_p21", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 70, "t": ["마을 하나가 꺼졌다. 그다음 마을이 꺼졌다."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["마지막으로, 읍내의 주황빛이 사라졌다."], "dark": null}]}, {"gap": 80, "to": null}, {"img": "e01_p22", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -160, "t": ["골짜기 전체가", "바닥 없는 우물처럼 새카매졌다."], "dark": null}]}, {"gap": 80, "to": null}, {"img": "e01_p23", "h": 750, "ov": [{"k": "sfx", "x": 170, "y": -90, "t": "휘이이…", "fs": 46, "r": -8}]}, {"img": "e01_p24", "h": 750, "ov": [{"k": "sfx", "x": 760, "y": 170, "t": "치직!", "fs": 120, "r": -12}]}, {"rcard": ["……중계소……", "들리……"], "glitch": false, "h": 520}, {"img": "e01_p25", "h": 750, "ov": [{"k": "say", "x": 240, "y": 160, "t": ["중사님!", "여기 중계소입니다!", "지금 어디십니까?"], "tail": [430, 340], "ty": "shout", "fs": 34}]}, {"sfxcard": "치지직", "h": 280}, {"rcard": ["……절대……", "내려오지 마……"], "glitch": true, "h": 820}, {"gap": 60, "to": null}, {"img": "e01_p26", "h": 750, "ov": [{"k": "cap", "x": 330, "y": 70, "t": ["그리고 무전은 끊겼다."], "dark": null}, {"k": "sfx", "x": 820, "y": -150, "t": "딸깍.", "fs": 44, "r": -8}, {"k": "sfx", "x": 860, "y": -90, "t": "딸깍.", "fs": 44, "r": -8}, {"k": "cap", "x": 330, "y": -60, "t": ["잡음조차 없었다."], "dark": null}]}, {"gap": 140, "to": null}, {"img": "e01_p27", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -140, "t": ["눈은 밤새 내렸다."], "dark": null}]}, {"gap": 220, "to": null}, {"card": ["전역 D-30.", "그날 밤, 무전이 끊겼다."], "style": "dark", "h": 620}]}, {"n": 2, "title": "혼자 남은 일주일", "items": [{"card": ["1일째."], "style": "paper", "h": 360}, {"img": "e02_p01", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["밤사이 세상이 하얗게 지워져 있었다."], "dark": null}]}, {"img": "e02_p02", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["부대 주파수, 비상 주파수, 인접 부대 주파수."], "dark": null}]}, {"img": "e02_p03", "h": 750, "ov": [{"k": "say", "x": 700, "y": 200, "t": ["지지직……"], "tail": null, "ty": "radio", "fs": 36}, {"k": "cap", "x": 400, "y": -70, "t": ["다이얼 끝에서 끝까지, 잡음뿐이었다."], "dark": null}]}, {"img": "e02_p04", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["휴대폰은 '서비스 없음'."], "dark": null}]}, {"img": "e02_p05", "h": 750, "ov": [{"k": "note", "x": 700, "y": 610, "t": ["07:00 전 주파수 교신 불가.", "민간 방송 수신 불가.", "근무자 2명 미복귀."], "fs": 34}]}, {"img": "e02_p06", "h": 750, "ov": [{"k": "note", "x": 500, "y": 375, "t": ["통신 두절 시, 별도 명령이 있을 때까지", "위치를 고수한다."], "fs": 40}]}, {"card": ["2일째."], "style": "paper", "h": 360}, {"img": "e02_p07", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["세 명이 사흘쯤 먹을 양."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["혼자라면 열흘, 아끼면 2주."], "dark": null}]}, {"img": "e02_p08", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["발전기는 하루 두 시간만 돌리기로 했다."], "dark": null}]}, {"img": "e02_p09", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -160, "t": ["골짜기는 여전히 새카맸다.", "불빛 하나 없었다."], "dark": null}]}, {"mode": "day"}, {"card": ["3일째."], "style": "paper", "h": 360}, {"img": "e02_p10", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["눈이 그쳤다. 하늘이 무섭도록 맑았다."], "dark": null}]}, {"img": "e02_p11", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["아무것도 움직이지 않았다."], "dark": null}]}, {"img": "e02_p12", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["연기는 없었다."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["한 줄기도."], "dark": null}]}, {"card": ["4일째."], "style": "paper", "h": 360}, {"img": "e02_p13", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 110, "t": ["참지 못하고 내려가 보려 했다."], "dark": null}]}, {"img": "e02_p14", "h": 750, "ov": [{"k": "say", "x": 700, "y": 170, "t": ["절대 내려오지 마."], "tail": null, "ty": "radio", "fs": 36}]}, {"img": "e02_p15", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["무엇이 무서운지도 모른 채, 그는 돌아섰다."], "dark": null}]}, {"img": "e02_p16", "h": 750, "ov": [{"k": "note", "x": 500, "y": 330, "t": ["위치 고수."], "fs": 56}]}, {"card": ["5일째. 6일째."], "style": "paper", "h": 360}, {"img": "e02_p17", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["D-25. D-24."], "dark": null}]}, {"img": "e02_p18", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["전역이 이렇게 의미 없는 숫자처럼 느껴진 건 처음이었다."], "dark": null}]}, {"card": ["7일째 아침."], "style": "paper", "h": 360}, {"img": "e02_p19", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["철문 앞, 눈 위에 갈색 종이 상자 하나."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["발자국은 보이지 않았다."], "dark": null}]}, {"img": "e02_p20", "h": 750, "ov": []}, {"img": "e02_p21", "h": 750, "ov": [{"k": "note", "x": 330, "y": 150, "t": ["PX — 핫팩 30개입"], "fs": 44}]}, {"img": "e02_p22", "h": 750, "ov": [{"k": "note", "x": 500, "y": 375, "t": ["병장님, 사 왔습니다.", "문 열지 마세요. 꼭 버티세요.", "— 민재"], "fs": 44}]}, {"img": "e02_p23", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -170, "t": ["민재는 여기까지 올라왔다."], "dark": null}]}, {"img": "e02_p24", "h": 750, "ov": [{"k": "say", "x": 760, "y": 120, "t": ["그런데, 왜 문을", "두드리지 않았을까."], "tail": [580, 280], "ty": "thought", "fs": 34}]}]}, {"n": 3, "title": "상자 속의 것", "items": [{"img": "e03_p01", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["도윤은 상자를 안으로 들이고 철문을 걸어 잠갔다."], "dark": null}]}, {"img": "e03_p02", "h": 750, "ov": [{"k": "note", "x": 500, "y": 300, "t": ["문 열지 마세요.", "바람이 …… 때는 …… 쓰세요"], "fs": 44}, {"k": "cap", "x": 500, "y": -60, "t": ["번진 볼펜 자국. 겨우 몇 글자만 읽혔다."], "dark": null}]}, {"img": "e03_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["핫팩 서른 개. 약속대로였다."], "dark": null}]}, {"img": "e03_p04", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["그런데 상자가 생각보다 무거웠다."], "dark": null}]}, {"img": "e03_p05", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["방독면이었다. 정화통 두 개와 함께."], "dark": null}]}, {"img": "e03_p06", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["민재는 핫팩을 사러 내려갔다가,", "방독면을 들고 돌아왔다."], "dark": null}]}, {"mode": "night"}, {"img": "e03_p07", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["발전기를 끄자 냉기가 벽을 타고 스며들었다."], "dark": null}]}, {"img": "e03_p08", "h": 750, "ov": [{"k": "say", "x": 730, "y": 110, "t": ["병장님, 이거 왜", "뜨거워지는지 아십니까?"], "tail": [650, 245], "ty": "normal", "fs": 34}]}, {"img": "e03_p09", "h": 750, "ov": [{"k": "say", "x": 330, "y": 100, "t": ["안에 든 철가루가 산소를 만나", "녹이 스는데, 그때 열이 납니다."], "tail": [250, 225], "ty": "normal", "fs": 34}]}, {"img": "e03_p10", "h": 750, "ov": [{"k": "say", "x": 280, "y": 120, "t": ["그러니까 이건, 녹스는 힘으로", "사람을 데우는 겁니다."], "tail": [450, 300], "ty": "normal", "fs": 34}]}, {"img": "e03_p11", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["녹스는 힘. 지금 그를 데우는 건 그것뿐이었다."], "dark": null}]}, {"card": ["새벽 세 시."], "style": "dark", "h": 420}, {"img": "e03_p12", "h": 750, "ov": [{"k": "say", "x": 500, "y": 375, "t": ["……군 일대…… 주민께서는……", "즉시 실내로…… 창문을 닫으시고……"], "tail": null, "ty": "radio", "fs": 34}]}, {"img": "e03_p13", "h": 750, "ov": [{"k": "sfx", "x": 800, "y": 140, "t": "벌떡", "fs": 64, "r": -8}]}, {"img": "e03_p14", "h": 750, "ov": [{"k": "say", "x": 500, "y": 200, "t": ["……반경 30킬로미터 이내……", "출입을 통제…… 바람의 방향에 따라……"], "tail": null, "ty": "radio", "fs": 32}]}, {"img": "e03_p15", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["녹음된 방송이었다. 그리고 40초 만에, 다시 잡음."], "dark": null}]}, {"img": "e03_p16", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["읍내에서 중계소까지."], "dark": null}]}, {"img": "e03_p17", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 375, "t": ["22킬로미터."], "dark": null}]}, {"img": "e03_p18", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -110, "t": ["반경 30킬로미터.", "중계소는, 그 안에 있었다."], "dark": null}]}]}, {"n": 4, "title": "말하지 말 것", "items": [{"img": "e04_p01", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["8일째부터는 날짜가 비슷하게 흘러갔다."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["물은 눈으로 만들었다."], "dark": null}]}, {"img": "e04_p02", "h": 750, "ov": [{"k": "sfx", "x": 780, "y": 150, "t": "덜덜", "fs": 60, "r": -8}, {"k": "cap", "x": 500, "y": -70, "t": ["눈을 그대로 먹으면, 몸이 그걸 녹이느라 체온을 쓴다."], "dark": null}]}, {"img": "e04_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["라면 한 봉지를 두 번에. 스프는 반만."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["나머지 반은 내일의 맛이었다."], "dark": null}]}, {"img": "e04_p04", "h": 750, "ov": [{"k": "sfx", "x": 700, "y": 200, "t": "털털…", "fs": 60, "r": -8}, {"k": "cap", "x": 500, "y": -70, "t": ["15일째, 발전기가 멈췄다."], "dark": null}]}, {"img": "e04_p05", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["건물에서 가장 작은 방으로 거처를 옮겼다."], "dark": null}]}, {"img": "e04_p06", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["숫자가 줄어들 때마다 민재의 얼굴이 떠올랐다."], "dark": null}]}, {"card": ["18일째."], "style": "paper", "h": 360}, {"img": "e04_p07", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["남의 관물함은 열지 않는다.", "2년 동안 지켜 온 규칙이었다."], "dark": null}]}, {"img": "e04_p08", "h": 750, "ov": [{"k": "say", "x": 760, "y": 120, "t": ["죄송합니다, 중사님."], "tail": [560, 280], "ty": "normal", "fs": 34}]}, {"img": "e04_p09", "h": 750, "ov": []}, {"img": "e04_p10", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["마지막 장에서 손을 멈췄다."], "dark": null}]}, {"notes": [["06:10 대대 상황실 비화 통화.", "인근 지역 비상. 상세 내용 전달 불가.", "중계소 철수. 단, 중계 유지 인원 1명 잔류할 것.", "잔류자 선정: 한도윤 병장."]], "h": null}, {"notes": [["본인에게는 말하지 말 것.", "― 지시사항"]], "h": null}, {"img": "e04_p11", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["그날 아침, 모두 평소와 같았다."], "dark": null}]}, {"img": "e04_p12", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["모두 알고 있었다. 자신만 빼고."], "dark": null}]}, {"notes": [["한 병장은 내가", "반드시 데리러 온다."]], "h": null}, {"mode": "night"}, {"img": "e04_p13", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["화가 나야 하는지, 고마워해야 하는지", "알 수 없었다."], "dark": null}]}, {"img": "e04_p14", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 120, "t": ["이곳 중계기가 돌아가야", "산 아래의 무전이 이어졌다."], "dark": null}, {"k": "cap", "x": 500, "y": -160, "t": ["누군가는 남아야 했다."], "dark": null}]}, {"img": "e04_p15", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["데리러 오겠다던 사람은 오지 않았다. D-12."], "dark": null}]}, {"img": "e04_p16", "h": 750, "ov": []}]}, {"n": 5, "title": "전역 신고", "items": [{"img": "e05_p01", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["아무리 아껴도 사흘이었다."], "dark": null}]}, {"img": "e05_p02", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 140, "t": ["30일째 아침이 밝았다."], "dark": null}, {"k": "cap", "x": 500, "y": -170, "t": ["전역일."], "dark": null}]}, {"img": "e05_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["코펠에 물을 데워 면도를 했다."], "dark": null}]}, {"img": "e05_p04", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["가장 깨끗한 전투복을 꺼내 입었다."], "dark": null}]}, {"img": "e05_p05", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -160, "t": ["눈부시게 맑은 날이었다."], "dark": null}]}, {"img": "e05_p06", "h": 750, "ov": [{"k": "say", "x": 225, "y": 120, "t": ["병장 한도윤은, 오늘부로", "전역을 명받았습니다.", "이에 신고합니다."], "tail": [450, 230], "ty": "normal", "fs": 34}]}, {"img": "e05_p07", "h": 750, "ov": [{"k": "sfx", "x": 720, "y": 200, "t": "펄럭", "fs": 64, "r": -8}, {"k": "cap", "x": 500, "y": -70, "t": ["대답할 사람은 없었다."], "dark": null}]}, {"img": "e05_p08", "h": 750, "ov": [{"k": "say", "x": 760, "y": 130, "t": ["……충성."], "tail": [580, 280], "ty": "normal", "fs": 34}]}, {"img": "e05_p09", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["웃음이 났다. 웃다가 그만 눈물이 났다."], "dark": null}]}, {"card": ["위치 고수. 별도 명령이 있을 때까지.", "명령은 오지 않았다."], "style": "paper", "h": 440}, {"img": "e05_p10", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -60, "t": ["산을 내려가는 데 필요한 것들이었다."], "dark": null}]}, {"img": "e05_p11", "h": 750, "ov": [{"k": "note", "x": 640, "y": 300, "t": ["한도윤. 전역일에 하산함. 읍내 방향.", "누구든 이 글을 보면,", "나는 살아 있었다."], "fs": 36}]}, {"img": "e05_p12", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -170, "t": ["철문을 나섰다."], "dark": null}]}, {"img": "e05_p13", "h": 750, "ov": [{"k": "sfx", "x": 780, "y": 170, "t": "바삭", "fs": 64, "r": -8}, {"k": "cap", "x": 500, "y": -70, "t": ["산길은 한 달 사이에 사라져 있었다."], "dark": null}]}, {"img": "e05_p14", "h": 750, "ov": [{"k": "note", "x": 500, "y": 330, "t": ["바람이 산으로 불 때는", "이걸 쓰세요."], "fs": 48}, {"k": "cap", "x": 500, "y": -60, "t": ["번진 글자가 무엇이었는지, 이제는 알 수 있었다."], "dark": null}]}, {"img": "e05_p15", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 120, "t": ["굽이진 커브를 돌자,"], "dark": null}]}, {"img": "e05_p16", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -100, "t": ["한 달 전, 그 엔진 소리를", "끝까지 듣고 있었던 트럭이었다."], "dark": null}]}]}, {"n": 6, "title": "블랙박스", "items": [{"img": "e06_p01", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["사고는 아니었다. 누군가 세워 두고 떠난 것처럼."], "dark": null}]}, {"img": "e06_p02", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["조수석에는 민재의 털모자가 떨어져 있었다."], "dark": null}]}, {"img": "e06_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["보급품이 그대로 있었다."], "dark": null}]}, {"img": "e06_p04", "h": 750, "ov": [{"k": "say", "x": 760, "y": 140, "t": ["……왜."], "tail": [560, 300], "ty": "normal", "fs": 34}]}, {"img": "e06_p05", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["계기판에 불 하나 들어오지 않았다."], "dark": null}]}, {"img": "e06_p06", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["블랙박스."], "dark": null}]}, {"img": "e06_p07", "h": 750, "ov": [{"k": "sfx", "x": 720, "y": 180, "t": "삑", "fs": 56, "r": -8}]}, {"mode": "cam"}, {"img": "e06_p08", "h": 750, "ov": [{"k": "stamp", "t": "REC 14:14"}, {"k": "say", "x": 300, "y": 130, "t": ["♪ 랄랄라~"], "tail": [420, 300], "ty": "normal", "fs": 34}]}, {"img": "e06_p09", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["도윤은 저도 모르게 웃었다."], "dark": null}]}, {"img": "e06_p10", "h": 750, "ov": [{"k": "stamp", "t": "REC 15:02"}]}, {"img": "e06_p11", "h": 750, "ov": [{"k": "stamp", "t": "REC 15:03"}, {"k": "say", "x": 320, "y": 120, "t": ["지금 보급소 없습니다.", "전부 철수 중입니다."], "tail": [620, 250], "ty": "normal", "fs": 34}]}, {"img": "e06_p12", "h": 750, "ov": [{"k": "stamp", "t": "REC 15:03"}, {"k": "say", "x": 760, "y": 120, "t": ["위에 한 명 더 있어.", "데리고 내려와야 돼."], "tail": [610, 230], "ty": "normal", "fs": 34}]}, {"img": "e06_p13", "h": 750, "ov": [{"k": "stamp", "t": "REC 15:04"}, {"k": "say", "x": 320, "y": 120, "t": ["지금은 못 올라갑니다.", "저녁부터 바람이 산 쪽으로 바뀝니다."], "tail": [700, 290], "ty": "normal", "fs": 34}]}, {"img": "e06_p14", "h": 750, "ov": [{"k": "stamp", "t": "REC 15:04"}, {"k": "say", "x": 740, "y": 140, "t": ["그럼 더더욱", "지금 데려와야지!"], "tail": [560, 290], "ty": "shout", "fs": 34}]}, {"img": "e06_p15", "h": 750, "ov": [{"k": "stamp", "t": "REC 23:38"}, {"k": "say", "x": 720, "y": 160, "t": ["……중계소……", "들리나……"], "tail": null, "ty": "radio", "fs": 36}]}, {"img": "e06_p16", "h": 750, "ov": [{"k": "say", "x": 500, "y": 330, "t": ["……절대……", "내려오지 마……"], "tail": null, "ty": "radio", "fs": 44}]}, {"img": "e06_p17", "h": 750, "ov": [{"k": "stamp", "t": "REC 23:39"}, {"k": "say", "x": 860, "y": 115, "t": ["중사님!", "중사님!"], "tail": [790, 255], "ty": "shout", "fs": 34}]}, {"mode": "night"}, {"sfxcard": "― 기록 끝 ―", "h": 320}, {"img": "e06_p18", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["그날 밤, 무전이 끊긴 그 순간."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["그들은, 걸어서 두 시간 거리에 있었다."], "dark": null}]}]}, {"n": 7, "title": "빈 부대", "items": [{"img": "e07_p01", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["경유 말통은 들고 갈 수 없었다. 위치를 수첩에 적었다."], "dark": null}]}, {"img": "e07_p02", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 120, "t": ["해 질 무렵, 대대 위병소가 보였다."], "dark": null}]}, {"img": "e07_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["받아 주는 사람은 없었다."], "dark": null}]}, {"img": "e07_p04", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["부대는 이상할 만큼 깨끗했다."], "dark": null}]}, {"img": "e07_p05", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["사람만 없었다."], "dark": null}]}, {"img": "e07_p06", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["붉은 원의 중심은 읍내 아래 공단."], "dark": null}]}, {"notes": [["야간 풍향 전환 예상.", "저지대에 가스 정체.", "고지대 상대적 안전."]], "h": null}, {"img": "e07_p07", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -100, "t": ["어떤 가스는 공기보다 무거워서", "낮은 곳으로 가라앉는다."], "dark": null}]}, {"img": "e07_p08", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 130, "t": ["그래서 산꼭대기의 그가 무사했다."], "dark": null}, {"k": "cap", "x": 500, "y": -170, "t": ["그래서 박 중사는", "내려오지 말라고 했다."], "dark": null}]}, {"img": "e07_p09", "h": 750, "ov": []}, {"notes": [["한도윤 병장 ― 중계소 잔류 (중계 유지).", "추후 헬기 회수.", "→ 기상 악화로 회수 불가."]], "h": null}, {"mode": "night"}, {"img": "e07_p10", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["그날 밤, 한 달 만에 따뜻하게 잤다."], "dark": null}]}, {"img": "e07_p11", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["마지막 장. 마지막 줄."], "dark": null}]}, {"notes": [["대피 6일차 23:40. 대대 전 인원 철수 완료.", "23:52. 김민재 일병 이탈.", "산 방향으로 감. 추적 불가."]], "h": null}, {"img": "e07_p12", "h": 750, "ov": []}, {"img": "e07_p13", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -180, "t": ["그 밤새, 민재는 핫팩 한 상자를 들고", "혼자 그 산을 올랐다."], "dark": null}]}]}, {"n": 8, "title": "읍내", "items": [{"img": "e08_p01", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 120, "t": ["방독면을 쓴 채 걸었다."], "dark": null}]}, {"img": "e08_p02", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["모두 서둘렀지만, 질서 있게 떠난 것 같았다."], "dark": null}]}, {"img": "e08_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["읍내는 조용했다."], "dark": null}]}, {"img": "e08_p04", "h": 750, "ov": []}, {"img": "e08_p05", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["한 달 만에 처음 본 살아 있는 것이었다."], "dark": null}]}, {"img": "e08_p06", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["편의점은 사거리 모퉁이에 있었다."], "dark": null}]}, {"img": "e08_p07", "h": 750, "ov": []}, {"img": "e08_p08", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["사람들이 무엇부터 집어 갔는지가 그대로 남아 있었다."], "dark": null}]}, {"img": "e08_p09", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["차갑고 짰다. 세상에서 가장 맛있었다."], "dark": null}]}, {"img": "e08_p10", "h": 750, "ov": [{"k": "note", "x": 560, "y": 330, "t": ["생수 2, 통조림 3, 물티슈 1, 라이터 1, 건전지 1.", "모자라면 연락 주세요. ― 한도윤"], "fs": 32}]}, {"img": "e08_p11", "h": 750, "ov": []}, {"notes": [["긴급 대피 안내", "공단 사고로 인한 유해가스 확산 우려로,", "읍 전 지역 주민은 대피하여 주시기 바랍니다.", "가스 폭발 위험에 따라 차례로 전력을 차단합니다.", "1차 집결지: 읍내 실내체육관"]], "h": null}, {"img": "e08_p12", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["불빛은 저절로 꺼진 게 아니었다."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["불꽃 하나 튀지 않도록, 사람들이 차례로 꺼 나간 것이었다."], "dark": null}]}, {"img": "e08_p13", "h": 750, "ov": [{"k": "note", "x": 500, "y": 330, "t": ["도윤 병장님 → 체육관"], "fs": 58}]}, {"img": "e08_p14", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["비뚤고, 익숙한 글씨였다."], "dark": null}]}]}, {"n": 9, "title": "체육관", "items": [{"img": "e09_p01", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 120, "t": ["체육관 문에는 쇠사슬이 걸려 있지 않았다."], "dark": null}]}, {"img": "e09_p02", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -170, "t": ["간이침대가 끝도 없이 줄지어 있었다."], "dark": null}]}, {"img": "e09_p03", "h": 750, "ov": []}, {"img": "e09_p04", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["수백 명이 여기 있었다. 그리고 떠났다."], "dark": null}]}, {"img": "e09_p05", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["사람들이 서로를 찾는 글이었다."], "dark": null}]}, {"notes": [["엄마 아빠 2호차 버스 탔어요.", "할머니 찾으면 연락 주세요."], ["302호 할아버지 못 보신 분."], ["우리 개 콩이, 하얀 진도개.", "혹시 보시면."]], "h": null}, {"img": "e09_p06", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["너무나 잘 아는 글씨였다."], "dark": null}]}, {"notes": [["도윤아. 엄마 먼저 간다.", "군대에서 다 데려간다고 하더라.", "넌 꼭 살아서 와.", "검문소 지나서 기다릴게."]], "h": null}, {"img": "e09_p07", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["자대 배치 날, 고향 바로 위 산꼭대기를 보고 그는 웃었었다."], "dark": null}]}, {"img": "e09_p08", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["근무 때마다 불빛을 센 이유였다."], "dark": null}, {"k": "cap", "x": 500, "y": -60, "t": ["그 불빛 중 하나가 집이었다."], "dark": null}]}, {"img": "e09_p09", "h": 750, "ov": []}, {"notes": [["병장님. 저 먼저 검문소로 갑니다.", "중사님은"]], "h": null}, {"card": ["뒷부분은 찢겨 나가 있었다."], "style": "paper", "h": 360}, {"img": "e09_p10", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["손잡이를 돌리면 안의 작은 발전기가 전기를 만든다."], "dark": null}]}, {"img": "e09_p11", "h": 750, "ov": [{"k": "sfx", "x": 780, "y": 160, "t": "드르르륵", "fs": 58, "r": -8}]}, {"img": "e09_p12", "h": 750, "ov": [{"k": "say", "x": 500, "y": 375, "t": ["……생존자는…… 북쪽 국도 31킬로미터 지점……", "임시 검문소로…… 마지막 수송은…… 모레 정오……"], "tail": null, "ty": "radio", "fs": 30}]}, {"img": "e09_p13", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": -180, "t": ["31킬로미터. 눈길.", "남은 시간은 이틀."], "dark": null}]}, {"img": "e09_p14", "h": 750, "ov": []}]}, {"n": 10, "title": "검문소", "items": [{"img": "e10_p01", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 120, "t": ["국도는 끝없이 하얗다."], "dark": null}]}, {"img": "e10_p02", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -100, "t": ["랜턴 불빛이 닿는 몇 미터만이", "세상의 전부였다."], "dark": null}]}, {"img": "e10_p03", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["31에서 하나씩."], "dark": null}]}, {"img": "e10_p04", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["첫날 밤은 버스 정류장에서 보냈다."], "dark": null}]}, {"img": "e10_p05", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["마지막 핫팩 두 개. 녹스는 힘."], "dark": null}]}, {"mode": "day"}, {"img": "e10_p06", "h": 750, "ov": [{"k": "cap", "x": 500, "y": 60, "t": ["둘째 날 아침, 새 눈 위에 발자국이 있었다."], "dark": null}]}, {"img": "e10_p07", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["오늘 아침의 것이었다."], "dark": null}]}, {"img": "e10_p08", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["누군가 무언가를 찾으면서 걷고 있었다."], "dark": null}]}, {"img": "e10_p09", "h": 1769, "ov": [{"k": "cap", "x": 500, "y": 120, "t": ["정오를 이십 분 남기고, 검문소가 보였다."], "dark": null}, {"k": "cap", "x": 500, "y": -170, "t": ["그리고 아무도 없었다."], "dark": null}]}, {"img": "e10_p10", "h": 750, "ov": [{"k": "say", "x": 760, "y": 120, "t": ["늦었나."], "tail": [580, 280], "ty": "thought", "fs": 34}]}, {"img": "e10_p11", "h": 750, "ov": [{"k": "cap", "x": 500, "y": -70, "t": ["몇 시간 전까지 누군가 여기서 불을 쬐고 있었다."], "dark": null}]}, {"img": "e10_p12", "h": 750, "ov": [{"k": "sfx", "x": 720, "y": 180, "t": "짤랑", "fs": 58, "r": -8}]}, {"img": "e10_p13", "h": 750, "ov": [{"k": "note", "x": 500, "y": 340, "t": ["박정우."], "fs": 64}]}, {"img": "e10_p14", "h": 750, "ov": [{"k": "say", "x": 500, "y": 375, "t": ["……이 지역은…… 통제 구역……", "접근하지……"], "tail": null, "ty": "radio", "fs": 36}]}, {"img": "e10_p15", "h": 750, "ov": [{"k": "sfx", "x": 220, "y": 180, "t": "뽀드득", "fs": 52, "r": -8}]}, {"img": "e10_p16", "h": 750, "ov": []}, {"img": "e10_p17", "h": 750, "ov": [{"k": "say", "x": 760, "y": 130, "t": ["……병장님?"], "tail": [580, 290], "ty": "normal", "fs": 34}]}, {"card": ["― 10화 끝 · 시즌 1 완 ―"], "style": "dark", "h": 420}]}];
+const SERIES={"title": "이름 없는 중계소", "author": "글·그림 중계소 작업실", "tags": ["재난", "미스터리", "휴먼드라마"], "logline": "전역 30일을 앞둔 병장이 강원도 산꼭대기 통신 중계소에 혼자 남겨진다. 무전이 끊기고, 산 아래 불빛이 하나씩 꺼지고, 아무도 데리러 오지 않는다. 그가 마침내 산을 내려왔을 때, 세상엔 사람이 없었다.", "date": "2026.11.20"};
+const DAYBG='#ffffff', NIGHTBG='#0b0d13';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+function name(x,y,t){const fs=28,w=tw(t,fs)+40;return `<rect x="${x-w/2}" y="${y-24}" width="${w}" height="48" fill="#fffdf6" stroke="${ink}" stroke-width="2.5"/>`+txt(x,y,[t],{fs,f:FM,w:800});}
+function paper(x,y,lines,fs,rot){
+  const lh=fs*1.25, w=Math.max(...lines.map(l=>tw(l,fs)))*0.97+80, h=lines.length*lh+50;
+  return `<g transform="rotate(${rot} ${x} ${y})"><rect x="${f1(x-w/2+6)}" y="${f1(y-h/2+8)}" width="${f1(w)}" height="${f1(h)}" fill="#000" opacity=".28"/><rect x="${f1(x-w/2)}" y="${f1(y-h/2)}" width="${f1(w)}" height="${f1(h)}" fill="#f7f1df"/>`+txt(x,y,lines,{fs,lh,f:FP,fill:'#24304d',w:400})+`</g>`;
+}
+function stamp(t){return `<rect x="24" y="22" width="${tw(t,26)*.95+40}" height="44" fill="#000" opacity=".55"/><circle cx="46" cy="44" r="8" fill="#ff3b30"/>`+txt(64,44,[t],{fs:26,f:'monospace',fill:'#fff',w:700,a:'start'});}
+function overlay(o,H,night){
+  const Y=v=>v<0?H+v:v, T=p=>p?[p[0],Y(p[1])]:null;
+  switch(o.k){
+    case 'cap': return cap(o.x,Y(o.y),o.t,{fs:30,dark:o.dark===null||o.dark===undefined?night:o.dark});
+    case 'say': return bubble(o.x,Y(o.y),o.t,{type:o.ty,fs:o.fs||34,tail:T(o.tail)});
+    case 'sfx': return sfx(o.x,Y(o.y),o.t,{fs:o.fs,r:o.r,fill:night?'#eef2fb':ink,stroke:night?'#0b0d13':'#fff',sw:night?6:8});
+    case 'note': return paper(o.x,Y(o.y),o.t,o.fs||40,-2);
+    case 'name': return name(o.x,Y(o.y),o.t);
+    case 'stamp': return stamp(o.t);
+  }
+  return '';
+}
+const svg=(h,inner)=>`<svg viewBox="0 0 ${W} ${h}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+
+/* ---------- 이 브라우저의 기록(읽은 화) ---------- */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let seen=store.get('relay_seen',{});
+
+let db=null, me=null;
+function flash(m){const d=document.createElement('div');d.textContent=m;d.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#16171b;color:#fff;padding:10px 16px;border-radius:20px;font-size:13px;z-index:50';document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+/* ---------- 작품 홈 ---------- */
+let order='old';
+function home(){
+  document.getElementById('barTitle').textContent='';
+  const eps=order==='old'?DATA:[...DATA].reverse();
+  const lastSeen=Math.max(0,...Object.keys(seen).map(Number));
+  const startN=lastSeen&&lastSeen<DATA.length?lastSeen+1:1;
+  return `<div class="wrap">
+  <div class="hero"><img src="thumb/hero.jpg" alt=""><div class="shade"></div><div class="info">
+    <h1>${esc(SERIES.title)}</h1><div class="au">${esc(SERIES.author)} · 시즌 1 완결 · 총 ${DATA.length}화</div>
+    <div class="tags">${SERIES.tags.map(t=>`<span>#${esc(t)}</span>`).join('')}</div></div></div>
+  <div class="box"><p class="logline">${esc(SERIES.logline)}</p>
+    <div class="acts"><a class="btn main" href="#relay/ep${startN}">${lastSeen&&lastSeen<DATA.length?`이어보기 · ${startN}화`:'첫화 보기'}</a><a class="btn" href="#relay/ep${DATA.length}">최신화 보기</a></div></div>
+  <div class="lhead"><b>전체 ${DATA.length}화</b><div><button data-ord="old" class="${order==='old'?'on':''}">1화부터</button> · <button data-ord="new" class="${order==='new'?'on':''}">최신순</button></div></div>
+  ${eps.map(e=>`<a class="ep ${seen[e.n]?'seen':''}" href="#relay/ep${e.n}"><img loading="lazy" src="thumb/e${pad(e.n)}.jpg" alt=""><div>
+     <div class="t">${e.n}화. ${esc(e.title)}${e.n===DATA.length?'<span class="badge">완결</span>':''}</div>
+     <div class="m"><span>${SERIES.date}</span>${seen[e.n]?'<span>읽음</span>':''}</div></div></a>`).join('')}
+  <div class="foot">이 작품의 그림은 생성형 AI(FLUX.2 klein)로 만들었어요.</div></div>`;
+}
+
+/* ---------- 뷰어 ---------- */
+function strip(n){
+  const ep=DATA[n-1]; let night=false, html='';
+  const bg=()=>night?NIGHTBG:DAYBG;
+  html+=`<div class="block" style="background:#05070d">${svg(560,`<rect width="${W}" height="560" fill="#05070d"/><image href="img/e${pad(n)}_cover.jpg" x="0" y="0" width="1000" height="560" preserveAspectRatio="xMidYMid slice" opacity=".55"/><rect width="${W}" height="560" fill="url(#cg)"/><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset=".3" stop-color="#05070d" stop-opacity="0"/><stop offset="1" stop-color="#05070d"/></linearGradient></defs>`+txt(500,400,[SERIES.title],{fs:58,f:FM,fill:'#f2ecdc',w:800,ls:5})+txt(500,475,[`${n}화 · ${ep.title}`],{fs:30,f:FM,fill:'#c4bdac',w:700,ls:2}))}</div><div style="height:60px;background:${DAYBG}"></div>`;
+  for(const it of ep.items){
+    if(it.mode){night=(it.mode==='night'||it.mode==='cam');continue}
+    if(it.gap!==undefined){ if(it.to==='night'){html+=`<div style="height:${it.gap}px;background:linear-gradient(${DAYBG},${NIGHTBG})"></div>`;night=true;} else html+=`<div style="height:${it.gap}px;background:${bg()}"></div>`; continue;}
+    if(it.img){html+=`<div class="panel" data-id="${it.img}" style="background:${bg()};padding:0 0 14px"><div style="position:relative"><img loading="lazy" src="img/${it.img}.jpg" width="1000" height="${it.h}" alt="">${svg(it.h,it.ov.map(o=>overlay(o,it.h,night)).join(''))}</div></div>`; continue;}
+    let h=it.h||420, inner='';
+    if(it.card){const st=it.style||'dark'; const b=st==='paper'?'#ece7da':(night?'#08090d':'#0a0a0c'), fg=st==='paper'?'#17181d':'#efe9da';
+      inner=`<rect width="${W}" height="${h}" fill="${b}"/>`+txt(500,h/2,it.card,{fs:40,f:FM,fill:fg,w:800,lh:68,ls:2});}
+    else if(it.rcard){const r=rng(h);inner=`<rect width="${W}" height="${h}" fill="#141814"/>`;
+      if(it.glitch)for(let i=0;i<50;i++){inner+=`<rect x="${f1(r()*140-90)}" y="${f1(r()*h)}" width="${f1(400+r()*800)}" height="${f1(2+r()*20)}" fill="${r()<.5?'#e9f0e6':'#5e6a5c'}" opacity="${f1(.06+r()*.22)}"/>`}
+      inner+=bubble(500,h/2,it.rcard,{type:'radio',fs:it.glitch?70:52});}
+    else if(it.sfxcard){inner=`<rect width="${W}" height="${h}" fill="${bg()}"/>`+sfx(500,h/2,it.sfxcard,{fs:56,fill:'#8e99b3',stroke:'#0b0d13',sw:4,ls:8});}
+    else if(it.notes){const g=it.notes; const fs=g.length>1?40:46; let y=0; const parts=[];
+      for(const lines of g){const lh=fs*1.25,hh=lines.length*lh+50;parts.push([lines,hh]);y+=hh+40;}
+      h=it.h||Math.max(380,y+80); inner=`<rect width="${W}" height="${h}" fill="#3b3226"/>`;
+      let yy=(h-y+40)/2; parts.forEach(([lines,hh],i)=>{inner+=paper(500+(i%2?40:-30),yy+hh/2,lines,fs,i%2?2:-2);yy+=hh+40;});}
+    html+=`<div class="block" style="background:${bg()}">${svg(h,inner)}</div>`;
+  }
+  const last=n===DATA.length;
+  html+=`<div class="block" style="background:${NIGHTBG}">${svg(300,`<rect width="${W}" height="300" fill="${NIGHTBG}"/>`+txt(500,150,[last?'― 시즌 1 완결 ―':`― ${n}화 끝 ―`],{fs:38,f:FM,fill:'#cfc8b6',w:800,ls:6}))}</div>`;
+  return html;
+}
+function afterHTML(n){
+  const last=n===DATA.length, nx=DATA[n];
+  return `<div class="epnav"><a class="${n===1?'off':''}" href="#relay/ep${n-1}">‹ 이전화</a><a class="mid" href="#relay">목록</a><a class="${last?'off':''}" href="#relay/ep${n+1}">다음화 ›</a></div>
+  ${nx?`<a class="nextcard" href="#relay/ep${nx.n}"><img src="thumb/e${pad(nx.n)}.jpg" alt=""><div><div class="s">다음 화</div><div class="t">${nx.n}화. ${esc(nx.title)}</div></div></a>`:`<div class="nextcard"><div><div class="s">시즌 1 완결</div><div class="t">끝까지 읽어 주셔서 고마워요.</div></div></div>`}
+  <div style="height:40px"></div>`;
+}
+function wireAfter(n){}
+/* ---------- 웹툰 목록(첫 화면) ---------- */
+function library(){
+  document.getElementById('barTitle').textContent='';
+  const lastSeen=Math.max(0,...Object.keys(seen).map(Number));
+  return `<div class="wrap"><div class="libhead"><h2>웹툰</h2><p>무료로 보는 연재 웹툰</p></div>
+  <div class="grid">
+    <a class="card" href="#relay"><div class="cv"><img src="thumb/poster.jpg" alt="이름 없는 중계소 표지"><span class="done">완결</span></div>
+      <div class="ct">${esc(SERIES.title)}</div><div class="ca">${esc(SERIES.author)}</div><div class="cg">${SERIES.tags.map(t=>'#'+esc(t)).join(' ')}</div>
+      ${lastSeen?`<div class="cr">${lastSeen}화까지 읽음</div>`:''}</a>
+    <div class="card soon"><div class="cv"><div class="ph">다음 작품<br>준비 중</div></div><div class="ct">Coming soon</div></div>
+  </div><div class="foot">그림은 생성형 AI(FLUX.2 klein)로 만들었어요.</div></div>`;
+}
+/* ---------- 화면 전환 ---------- */
+let curView=null;
+function route(){
+  const h=location.hash; const m=/^#relay\/ep(\d+)$/.exec(h); const n=m?+m[1]:0;
+  const app=document.getElementById('app');
+  if(n>=1&&n<=DATA.length){
+    curView=n; document.getElementById('barTitle').textContent=`${n}화. ${DATA[n-1].title}`;
+    app.innerHTML=`<div id="strip">${strip(n)}</div><div class="after" id="after">${afterHTML(n)}</div>`;
+    seen[n]=1; store.set('relay_seen',seen);
+  } else if(h==='#relay'){
+    curView=0; app.innerHTML=home(); document.getElementById('barTitle').textContent=SERIES.title;
+    app.querySelectorAll('[data-ord]').forEach(b=>b.onclick=()=>{order=b.dataset.ord;route()});
+  } else { curView=-1; app.innerHTML=library(); }
+  window.scrollTo(0,0);
+}
+function refresh(){}
+document.getElementById('barList').onclick=()=>{location.hash=curView>0?'#relay':'';};
+const tt=document.getElementById('toTop'); tt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+window.addEventListener('scroll',()=>{tt.style.display=window.scrollY>1200?'block':'none'},{passive:true});
+window.addEventListener('hashchange',route);
+route();
+})();
+</script></body></html>
