@@ -176,12 +176,20 @@ const svg=(h,inner)=>`<svg viewBox="0 0 ${W} ${h}" xmlns="http://www.w3.org/2000
 const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let seenAll=store.get('relay_seen2',{});
 const seenOf=k=>(seenAll[k]=seenAll[k]||{});
+function wrapT(t,fs,max){const ws=String(t).split(' ');const out=[];let cur='';
+  for(const w of ws){const c=cur?cur+' '+w:w; if(tw(c,fs)>max&&cur){out.push(cur);cur=w;} else cur=c;} if(cur)out.push(cur); return out;}
 function tipCard(it){
-  const lh=62, h=170+it.lines.length*lh+50;
+  const fs=30, lh=44, gap=22, maxW=730;
+  let tfs=36; const title='생존 노트 · '+it.tip; while(tw(title,tfs)>820&&tfs>26)tfs-=2;
+  const rows=it.lines.map(l=>wrapT(l,fs,maxW));
+  const body=rows.reduce((a,r)=>a+r.length*lh+gap,0);
+  const h=170+body+60;
   let s=`<rect width="${W}" height="${h}" fill="#eef6f0"/><rect x="60" y="50" width="880" height="${h-100}" rx="22" fill="#fff" stroke="#00b860" stroke-width="4"/>`+
     `<rect x="60" y="50" width="880" height="86" rx="22" fill="#00b860"/><rect x="60" y="110" width="880" height="26" fill="#00b860"/>`+
-    txt(500,93,['생존 노트 · '+it.tip],{fs:36,fill:'#fff',w:900});
-  it.lines.forEach((l,i)=>{const y=190+i*lh; s+=`<circle cx="125" cy="${y}" r="20" fill="#00b860"/>`+txt(125,y,[String(i+1)],{fs:24,fill:'#fff',w:900})+txt(165,y,[l],{fs:30,fill:'#1d2a22',w:500,a:'start'});});
+    txt(500,93,[title],{fs:tfs,fill:'#fff',w:900});
+  let y=175;
+  rows.forEach((r,i)=>{const cy=y+lh/2; s+=`<circle cx="125" cy="${cy}" r="20" fill="#00b860"/>`+txt(125,cy,[String(i+1)],{fs:24,fill:'#fff',w:900});
+    r.forEach((ln,j)=>{s+=txt(165,cy+j*lh,[ln],{fs,fill:'#1d2a22',w:500,a:'start'});}); y+=r.length*lh+gap;});
   return [h,s];
 }
 /* ---------- 작품 홈 ---------- */
